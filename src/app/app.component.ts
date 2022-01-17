@@ -13,17 +13,8 @@ export class AppComponent {
     new Persona('Laura', 'Juanez'),
     new Persona('Carlos', 'Lara')
   ];
-  nameInput: string = '';
-  lastnameInput: string = '';
 
-  addPeople(): void {
-    let newPeople = new Persona(this.nameInput, this.lastnameInput);
-    this.personas.push(newPeople);
-    this.cleanInput();
-  }
-
-  cleanInput(): void {
-    this.nameInput = '';
-    this.lastnameInput = '';
+  addedPeople(persona: Persona): void {
+    this.personas.push(persona);
   }
 }
