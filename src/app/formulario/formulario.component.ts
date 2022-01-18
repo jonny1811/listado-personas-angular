@@ -18,7 +18,9 @@ export class FormularioComponent implements OnInit {
   constructor(
     private loggingService: LoggingService,
     private personasService: PersonasService
-  ) { }
+  ) {
+    this.personasService.greeting.subscribe((index: number) => alert('El indice es: ' + index));
+  }
 
   ngOnInit(): void {
 
