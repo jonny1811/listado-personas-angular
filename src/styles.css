@@ -87,3 +87,11 @@ input[type="text"]:focus {
   color: grey;
   opacity: 1;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.btn-red {
+  background-color: red;
+}
