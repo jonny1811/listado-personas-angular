@@ -1,21 +1,31 @@
 import { EventEmitter, Injectable } from "@angular/core";
+import { DataServices } from "./data.services";
 import { LoggingService } from "./LoggingService.service";
 import { Persona } from "./persona.model";
 
 @Injectable()
 export class PersonasService {
-  personas: Persona[] = [
-    new Persona('Juan', 'Perez'),
-    new Persona('Laura', 'Juanez')
-  ];
+  personas: Persona[] = [];
 
   greeting = new EventEmitter<number>();
 
-  constructor(private loggingService: LoggingService) { }
+  constructor(
+    private loggingService: LoggingService,
+    private dataServices: DataServices
+  ) { }
+
+  setPeople(peoples: Persona[]) {
+    this.personas = peoples;
+  }
+
+  getPeoples() {
+    return this.dataServices.loadPeoples();
+  }
 
   addPeople(persona: Persona): void {
     this.loggingService.sendMessageConsole('agregamos persona:' + JSON.stringify(persona));
     this.personas.push(persona);
+    this.dataServices.savePeoples(this.personas);
   }
 
   findPeople(index: number): Persona {
