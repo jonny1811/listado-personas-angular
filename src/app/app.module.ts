@@ -12,22 +12,33 @@ import { PersonasComponent } from './personas/personas.component';
 import { ErrorComponent } from './error/error.component';
 import { DataServices } from './data.services'
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { LoginService } from './login/login.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PersonaComponent,
-    FormularioComponent,
-    PersonasComponent,
-    ErrorComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
-  providers: [LoggingService, PersonasService, DataServices],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		PersonaComponent,
+		FormularioComponent,
+		PersonasComponent,
+		ErrorComponent,
+		LoginComponent
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		AppRoutingModule,
+		HttpClientModule,
+		provideFirebaseApp(() => initializeApp({
+			apiKey: "AIzaSyDvUO2Ql1zW18btS8p8Mw_335VevnytVYI",
+			authDomain: "listado-personas-924f0.firebaseapp.com",
+		})),
+		provideAuth(() => getAuth())
+	],
+	providers: [LoggingService, PersonasService, DataServices, LoginService],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
