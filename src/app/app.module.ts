@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { LoginService } from './login/login.service';
+import { LoginGuardian } from './login/login-guardian.service';
 
 @NgModule({
 	declarations: [
@@ -38,7 +39,7 @@ import { LoginService } from './login/login.service';
 		})),
 		provideAuth(() => getAuth())
 	],
-	providers: [LoggingService, PersonasService, DataServices, LoginService],
+	providers: [LoggingService, PersonasService, DataServices, LoginService, LoginGuardian],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

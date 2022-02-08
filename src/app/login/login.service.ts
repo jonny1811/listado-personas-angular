@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { Router } from "@angular/router";
 
 @Injectable()
@@ -7,7 +7,7 @@ export class LoginService {
 
 	constructor(private auth: Auth, private router: Router) { }
 
-	token: string;
+	token: string | null;
 
 	login(email: string, password: string) {
 		signInWithEmailAndPassword(this.auth, email, password)
@@ -27,5 +27,16 @@ export class LoginService {
 
 	getIdToken() {
 		return this.token;
+	}
+
+	isAuthenticated() {
+		return this.token != null;
+	}
+
+	logout() {
+		signOut(this.auth).then(() => {
+			this.token = null;
+			this.router.navigate(['login'])
+		}).catch(error => console.log('Error logout: ' + error));
 	}
 }

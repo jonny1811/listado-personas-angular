@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from './login/login.service';
 
 @Component({
 	selector: 'app-root',
@@ -8,8 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 	title = 'Listado de Personas';
 
-	constructor() { }
+	constructor(private loginService: LoginService) { }
 
 	ngOnInit(): void {
+	}
+
+	isAuthenticated(): boolean {
+		return this.loginService.isAuthenticated();
+	}
+
+	logout() {
+		this.loginService.logout();
 	}
 }
